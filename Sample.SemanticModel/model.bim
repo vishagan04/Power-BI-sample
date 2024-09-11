@@ -10437,6 +10437,14 @@
         "fromTable": "Invoice Data",
         "toColumn": "Date",
         "toTable": "Calendar"
+      },
+      {
+        "name": "413880bc-0d6f-41de-bc5c-a0f49d22caba",
+        "fromColumn": "Cohort-year",
+        "fromTable": "snowball_output",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_08e86376-04bf-4ab2-9664-d3dcf2cb1c14"
       }
     ],
     "sourceQueryCulture": "en-IN",
@@ -10690,6 +10698,33 @@
             "lineageTag": "58678278-7ca8-4da8-abf6-797b72ad515e",
             "sourceColumn": "eop_arr",
             "summarizeBy": "sum"
+          },
+          {
+            "name": "Cohort-year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "expression": "CALCULATE(min('snowball_output'[month_roll]),ALLEXCEPT(snowball_output,snowball_output[customer_key]))",
+            "formatString": "General Date",
+            "isDataTypeInferred": true,
+            "lineageTag": "83456fec-9814-49b2-a9e5-aab5d4640b14",
+            "summarizeBy": "none",
+            "type": "calculated",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_08e86376-04bf-4ab2-9664-d3dcf2cb1c14"
+                },
+                "isDefault": true,
+                "relationship": "413880bc-0d6f-41de-bc5c-a0f49d22caba"
+              }
+            ]
           }
         ],
         "lineageTag": "744cae45-56d1-449f-a713-0c4e9f955bd1",
@@ -12468,6 +12503,212 @@
             }
           }
         ]
+      },
+      {
+        "name": "LocalDateTable_08e86376-04bf-4ab2-9664-d3dcf2cb1c14",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "4044531b-3a85-4e7a-80c4-cc84696135de",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "6c55e9da-2cad-4ad0-b534-79a4610102c6",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "c4ec3c2d-9553-4c85-901e-5a6da4506bc0",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "c6ba51cc-23e3-4720-9382-decf06824639",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "d2850bba-aeb2-4556-9a38-f27f2a2d02b9",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "89ed46e3-1239-486e-b64e-1060a094b70c",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "ac6523bd-301b-425b-90e1-201e25e37108",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "81939771-a62e-418b-9b78-d11c89c4913f",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "af6e74ad-eecc-4f1f-b177-85411a19e112",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "3efc4bda-0b90-484e-a3e8-8642b228f7c7",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "cf2af25f-fe2c-4047-89bb-b354e19788e9",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "6d51c2da-d9a1-46e4-8370-37d2519b0a25"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "d2ce30e7-1f58-4c69-ba32-0261846bfe3a",
+        "partitions": [
+          {
+            "name": "LocalDateTable_08e86376-04bf-4ab2-9664-d3dcf2cb1c14",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('snowball_output'[Cohort-year])), 1, 1), Date(Year(MAX('snowball_output'[Cohort-year])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
       }
     ]
   }
