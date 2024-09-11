@@ -10,7 +10,7 @@
       "nodes": [
         {
           "location": {
-            "x": 0,
+            "x": 57,
             "y": 0
           },
           "nodeIndex": "snowball_output",
@@ -19,17 +19,69 @@
             "height": 300,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
-            "x": 589,
-            "y": 49
+            "x": 476,
+            "y": 0
           },
           "nodeIndex": "Calendar",
           "nodeLineageTag": "4682009f-138e-4082-ad99-ba3d208b7667",
           "size": {
             "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 873,
+            "y": 17
+          },
+          "nodeIndex": "Invoice Data",
+          "nodeLineageTag": "bd005534-ab11-4a10-9ff3-c35f55295667",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 53,
+            "y": 446
+          },
+          "nodeIndex": "Product",
+          "nodeLineageTag": "0c865b54-a511-4852-8079-2b0ce2eecd5e",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 401,
+            "y": 395
+          },
+          "nodeIndex": "customer",
+          "nodeLineageTag": "4fad5e86-7beb-4e88-8b0e-c90af4e940c1",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 823,
+            "y": 540
+          },
+          "nodeIndex": "customer_id",
+          "nodeLineageTag": "efea24ad-7157-4d99-8cda-02ee7d7c38e0",
+          "size": {
+            "height": 104,
             "width": 234
           },
           "zIndex": 0
